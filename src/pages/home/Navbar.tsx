@@ -10,7 +10,11 @@ const navLinks = [
   { label: 'Contact', href: '#contact' },
 ];
 
-export default function Navbar() {
+interface NavbarProps {
+  onEnrollClick: () => void;
+}
+
+export default function Navbar({ onEnrollClick }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -39,7 +43,7 @@ export default function Navbar() {
         <button onClick={() => handleNav('#home')} className="flex items-center gap-2 sm:gap-3 group">
         <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl overflow-hidden glow-card border border-yellow-500/30 group-hover:animate-logo-hover transition-all">
           <img
-            src="icons/logo12_27_224448png.png"
+            src="/icons/logo.png"
             alt="IOEL"
             className="object-contain scale-150 group-hover:scale-175 transition-transform duration-300"
           />
@@ -68,7 +72,7 @@ export default function Navbar() {
             Explore Courses
           </button>
           <button
-            onClick={() => handleNav('#contact')}
+            onClick={onEnrollClick}
             className="btn-gold text-sm py-2.5 px-5"
           >
             Enroll Now
@@ -104,7 +108,7 @@ export default function Navbar() {
             <button onClick={() => handleNav('#courses')} className="btn-outline text-sm text-center">
               Explore Courses
             </button>
-            <button onClick={() => handleNav('#contact')} className="btn-gold text-sm text-center">
+            <button onClick={onEnrollClick} className="btn-gold text-sm text-center">
               Enroll Now
             </button>
           </div>

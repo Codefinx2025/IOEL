@@ -20,7 +20,7 @@ export default function Footer() {
           <div className="col-span-1 sm:col-span-2 lg:col-span-1 space-y-4 sm:space-y-5">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-xl overflow-hidden border border-yellow-500/30">
-                <img src="/logo12_27_224448png.png" alt="IOEL" className="w-full h-full object-contain bg-white p-1" />
+                <img src="/icons/logo.png" alt="IOEL" className="w-full h-full object-contain bg-white p-1" />
               </div>
               <div>
                 <div className="text-white font-black text-xl tracking-wider">IOEL</div>

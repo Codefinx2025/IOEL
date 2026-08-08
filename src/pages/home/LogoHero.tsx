@@ -16,7 +16,7 @@ export default function LogoHero() {
             <div className="relative w-32 h-32 sm:w-44 sm:h-44 lg:w-56 lg:h-56 rounded-3xl p-2 glass-gold">
               <div className="w-full h-full rounded-2xl overflow-hidden bg-white flex items-center justify-center">
                 <img
-                  src="/logo12_27_224448png.png"
+                  src="/icons/logo.png"
                   alt="IOEL Logo"
                   className="w-2/3 h-2/3 object-contain"
                 />

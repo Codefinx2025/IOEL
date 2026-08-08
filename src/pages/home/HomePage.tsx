@@ -8,14 +8,18 @@ import CertificateShowcase from './CertificateShowcase';
 import Contact from './Contact';
 import Footer from './Footer';
 
-export default function HomePage() {
+interface HomePageProps {
+  onEnrollClick: () => void;
+}
+
+export default function HomePage({ onEnrollClick }: HomePageProps) {
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white">
-      <Navbar />
+      <Navbar onEnrollClick={onEnrollClick} />
 
       <Hero />
       <About />
-      <Courses />
+      <Courses onEnrollClick={onEnrollClick} />
       <LearningExperience />
       <Testimonials />
       <CertificateShowcase />

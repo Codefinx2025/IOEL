@@ -112,9 +112,20 @@ interface CourseCardProps {
   tag: string;
   tagColor: string;
   index: number;
+  onEnrollClick: () => void;
 }
 
-function CourseCard({ title, duration, students, rating, image, tag, tagColor, index }: CourseCardProps) {
+function CourseCard({
+  title,
+  duration,
+  students,
+  rating,
+  image,
+  tag,
+  tagColor,
+  index,
+  onEnrollClick,
+}: CourseCardProps) {
   return (
     <div
       className="reveal glass rounded-3xl overflow-hidden glow-card group card-3d"
@@ -150,7 +161,10 @@ function CourseCard({ title, duration, students, rating, image, tag, tagColor, i
           </span>
         </div>
 
-        <button className="w-full btn-gold flex items-center justify-center gap-2 py-3 text-sm font-bold group/btn">
+        <button
+          onClick={onEnrollClick}
+          className="w-full btn-gold flex items-center justify-center gap-2 py-3 text-sm font-bold group/btn"
+        >
           Enroll Now
           <ArrowRight size={16} className="transition-transform group-hover/btn:translate-x-1" />
         </button>
@@ -159,7 +173,11 @@ function CourseCard({ title, duration, students, rating, image, tag, tagColor, i
   );
 }
 
-export default function Courses() {
+interface CoursesProps {
+  onEnrollClick: () => void;
+}
+
+export default function Courses({ onEnrollClick }: CoursesProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -236,53 +254,19 @@ export default function Courses() {
 
         {/* ═══════════ Regular Courses Grid ═══════════ */}
         <div className="grid lg:grid-cols-4 gap-8">
-          {courses.map((course) => (
-            <div
+          {courses.map((course, index) => (
+            <CourseCard
               key={course.title}
-              className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group"
-            >
-              <div className="relative h-56 overflow-hidden">
-                <img
-                  src={course.image}
-                  alt={course.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-                />
-                <span className="absolute top-4 right-4 bg-yellow-500 text-black text-xs font-bold px-3 py-1 rounded-full">
-                  {course.tag}
-                </span>
-              </div>
-
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-[#111] mb-2">
-                  {course.title}
-                </h3>
-
-                <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
-                  <span className="flex items-center gap-1.5">
-                    <Clock size={14} className="text-yellow-500" />
-                    {course.duration}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Star size={14} className="fill-yellow-400 text-yellow-400" />
-                    <span className="text-yellow-500 font-semibold">{course.rating}</span>
-                  </span>
-                </div>
-
-                <p className="text-gray-500 text-sm leading-relaxed mb-6">
-                  {course.description}
-                </p>
-
-                <div className="flex items-center justify-between">
-                  <div className="flex gap-4 text-sm text-gray-500">
-                    <span>{course.lessons} Lessons</span>
-                    <span>{course.level}</span>
-                  </div>
-                  <button className="w-12 h-12 rounded-full bg-yellow-500 flex items-center justify-center hover:scale-110 transition">
-                    <ArrowRight size={18} />
-                  </button>
-                </div>
-              </div>
-            </div>
+              title={course.title}
+              duration={course.duration}
+              students={course.students}
+              rating={course.rating}
+              image={course.image}
+              tag={course.tag}
+              tagColor={course.tagColor}
+              index={index}
+              onEnrollClick={onEnrollClick}
+            />
           ))}
         </div>
 
@@ -365,7 +349,10 @@ export default function Courses() {
                       <span>{course.lessons} Lessons</span>
                       <span>{course.level}</span>
                     </div>
-                    <button className="w-12 h-12 rounded-full bg-yellow-500 flex items-center justify-center hover:scale-110 transition">
+                    <button
+                      onClick={onEnrollClick}
+                      className="w-12 h-12 rounded-full bg-yellow-500 flex items-center justify-center hover:scale-110 transition"
+                    >
                       <ArrowRight size={18} />
                     </button>
                   </div>

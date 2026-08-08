@@ -1,9 +1,30 @@
-import HomePage from "./pages/home/HomePage";
+import { useEffect, useState } from 'react';
+import HomePage from './pages/home/HomePage';
+import StudentSignUp from './pages/student/StudentSignUp';
 
 export default function App() {
+  const [path, setPath] = useState(window.location.pathname);
+
+  useEffect(() => {
+    const onPopState = () => setPath(window.location.pathname);
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+  }, []);
+
+  const navigate = (nextPath: string) => {
+    if (nextPath === window.location.pathname) return;
+    window.history.pushState({}, '', nextPath);
+    setPath(nextPath);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white">
-      <HomePage />
+      {path === '/student-signup' ? (
+        <StudentSignUp onBackHome={() => navigate('/')} />
+      ) : (
+        <HomePage onEnrollClick={() => navigate('/student-signup')} />
+      )}
     </div>
   );
 }
