@@ -1,28 +1,14 @@
 import { useState } from 'react';
-import {
-	Apple,
-	ArrowRight,
-	CalendarDays,
-	Chrome,
-	Eye,
-	EyeOff,
-	Lock,
-	Mail,
-	Sparkles,
-	UserRound,
-	X,
-	Users,
-	Clock3,
-} from 'lucide-react';
+import { Apple, Chrome, Eye, EyeOff, Lock, Mail, X } from 'lucide-react';
 
-interface StudentSignUpProps {
+interface StudentSignInProps {
 	onBackHome: () => void;
-	onSignInClick: () => void;
+	onSignUpClick: () => void;
 }
 
-export default function StudentSignUp({ onBackHome, onSignInClick }: StudentSignUpProps) {
+export default function StudentSignIn({ onBackHome, onSignUpClick }: StudentSignInProps) {
 	const [showPassword, setShowPassword] = useState(false);
-	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+	const [rememberMe, setRememberMe] = useState(true);
 
 	return (
 		<div className="min-h-screen bg-[#050505] text-white lg:overflow-hidden">
@@ -31,7 +17,7 @@ export default function StudentSignUp({ onBackHome, onSignInClick }: StudentSign
 
 				<button
 					onClick={onBackHome}
-					aria-label="Close signup page"
+					aria-label="Close sign in page"
 					className="absolute right-4 top-4 z-30 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white/80 backdrop-blur-md transition hover:bg-white/20 hover:text-white sm:right-6 sm:top-6 lg:right-8 lg:top-8"
 				>
 					<X size={20} />
@@ -51,28 +37,14 @@ export default function StudentSignUp({ onBackHome, onSignInClick }: StudentSign
 
 						<div className="mb-8 space-y-3 sm:mb-10">
 							<h1 className="text-3xl font-medium tracking-tight text-white sm:text-[42px] sm:leading-[1.05]">
-								Create an account
+								Welcome back
 							</h1>
-							<p className="text-sm text-white/55 sm:text-[15px]">
-								Sign up and get 30 day free trial
-							</p>
+							<p className="text-sm text-white/55 sm:text-[15px]">Sign in to continue to your account</p>
 						</div>
 
 						<form className="space-y-4">
 							<label className="block space-y-2">
-								<span className="text-[11px] font-medium uppercase tracking-[0.24em] text-white/40">Name</span>
-								<div className="flex h-14 items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 text-white/90 transition focus-within:border-yellow-500/50 focus-within:bg-white/[0.05]">
-									<UserRound size={18} className="text-yellow-500/90" />
-									<input
-										type="text"
-										defaultValue="Amélie Laurent"
-										className="w-full bg-transparent text-sm outline-none placeholder:text-white/25"
-									/>
-								</div>
-							</label>
-
-							<label className="block space-y-2">
-								<span className="text-[11px] font-medium uppercase tracking-[0.24em] text-white/40">Email</span>
+								<span className="text-[11px] font-medium text-white/50">Email</span>
 								<div className="flex h-14 items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 text-white/90 transition focus-within:border-yellow-500/50 focus-within:bg-white/[0.05]">
 									<Mail size={18} className="text-yellow-500/90" />
 									<input
@@ -84,7 +56,7 @@ export default function StudentSignUp({ onBackHome, onSignInClick }: StudentSign
 							</label>
 
 							<label className="block space-y-2">
-								<span className="text-[11px] font-medium uppercase tracking-[0.24em] text-white/40">Password</span>
+								<span className="text-[11px] font-medium text-white/50">Password</span>
 								<div className="flex h-14 items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 text-white/90 transition focus-within:border-yellow-500/50 focus-within:bg-white/[0.05]">
 									<Lock size={18} className="text-yellow-500/90" />
 									<input
@@ -103,32 +75,26 @@ export default function StudentSignUp({ onBackHome, onSignInClick }: StudentSign
 								</div>
 							</label>
 
-							<label className="block space-y-2">
-								<span className="text-[11px] font-medium uppercase tracking-[0.24em] text-white/40">Confirm Password</span>
-								<div className="flex h-14 items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 text-white/90 transition focus-within:border-yellow-500/50 focus-within:bg-white/[0.05]">
-									<Lock size={18} className="text-yellow-500/90" />
+							<div className="flex items-center justify-between gap-4 pt-1">
+								<label className="flex cursor-pointer items-center gap-2 text-xs text-white/70 sm:text-sm">
 									<input
-										type={showConfirmPassword ? 'text' : 'password'}
-										defaultValue="password123"
-										className="w-full bg-transparent text-sm outline-none placeholder:text-white/25"
+										type="checkbox"
+										checked={rememberMe}
+										onChange={(event) => setRememberMe(event.target.checked)}
+										className="h-4 w-4 rounded border-yellow-500/50 bg-transparent text-yellow-500 accent-yellow-500"
 									/>
-									<button
-										type="button"
-										onClick={() => setShowConfirmPassword((current) => !current)}
-										className="text-white/45 transition hover:text-white"
-										aria-label={showConfirmPassword ? 'Hide password confirmation' : 'Show password confirmation'}
-									>
-										{showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-									</button>
-								</div>
-							</label>
+									Remember me
+								</label>
+								<button type="button" className="text-xs font-medium text-yellow-500 transition hover:text-yellow-400 sm:text-sm">
+									Forgot password?
+								</button>
+							</div>
 
 							<button
 								type="submit"
-								className="mt-3 flex h-14 w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#F5A800] to-[#FFB300] text-sm font-bold text-black shadow-[0_12px_40px_rgba(245,168,0,0.35)] transition hover:scale-[1.01] hover:shadow-[0_16px_55px_rgba(245,168,0,0.45)]"
+								className="mt-3 flex h-14 w-full items-center justify-center rounded-full bg-gradient-to-r from-[#F5A800] to-[#FFB300] text-sm font-bold text-black shadow-[0_12px_40px_rgba(245,168,0,0.35)] transition hover:scale-[1.01] hover:shadow-[0_16px_55px_rgba(245,168,0,0.45)]"
 							>
-								Sign up
-								<ArrowRight size={18} />
+								Sign in
 							</button>
 
 							<div className="flex items-center gap-4 py-1">
@@ -157,9 +123,9 @@ export default function StudentSignUp({ onBackHome, onSignInClick }: StudentSign
 
 						<div className="mt-10 flex flex-col gap-3 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between sm:text-sm">
 							<p>
-								Already have an account?{' '}
-								<button type="button" onClick={onSignInClick} className="font-semibold text-yellow-500 transition hover:text-yellow-400">
-									Sign in
+								Don&apos;t have an account?{' '}
+								<button type="button" onClick={onSignUpClick} className="font-semibold text-yellow-500 transition hover:text-yellow-400">
+									Sign up
 								</button>
 							</p>
 							<button type="button" className="font-semibold text-yellow-500 transition hover:text-yellow-400">
@@ -179,9 +145,7 @@ export default function StudentSignUp({ onBackHome, onSignInClick }: StudentSign
 
 						<div className="relative z-10 flex h-full min-h-[520px] flex-col justify-between px-4 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8">
 							<div className="flex justify-end">
-								<div className="rounded-full bg-black/45 px-4 py-1 text-[11px] text-white/50 backdrop-blur-md">
-									Welcome to IOEL
-								</div>
+								<div className="rounded-full bg-black/45 px-4 py-1 text-[11px] text-white/50 backdrop-blur-md">Welcome to IOEL</div>
 							</div>
 
 							<div className="flex flex-wrap items-start justify-end gap-3 sm:gap-4">
@@ -258,25 +222,13 @@ export default function StudentSignUp({ onBackHome, onSignInClick }: StudentSign
 
 						<div className="pointer-events-none absolute bottom-5 left-5 right-5 grid gap-3 sm:left-6 sm:right-6 md:grid-cols-2">
 							<div className="glass-dark rounded-2xl px-4 py-3 shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
-								<div className="flex items-center gap-2 text-[11px] text-white/50">
-									<CalendarDays size={12} className="text-yellow-500" />
-									Monthly planner
-								</div>
-								<div className="mt-2 flex items-center gap-2 text-sm text-white/80">
-									<Sparkles size={14} className="text-yellow-500" />
-									Stay organized while learning
-								</div>
+								<div className="flex items-center gap-2 text-[11px] text-white/50">Monthly planner</div>
+								<div className="mt-2 flex items-center gap-2 text-sm text-white/80">Stay organized while learning</div>
 							</div>
 
 							<div className="glass-dark rounded-2xl px-4 py-3 shadow-[0_12px_30px_rgba(0,0,0,0.35)] md:justify-self-end md:max-w-[280px]">
-								<div className="flex items-center gap-2 text-[11px] text-white/50">
-									<Users size={12} className="text-yellow-500" />
-									Study group
-								</div>
-								<div className="mt-2 flex items-center gap-2 text-sm text-white/80">
-									<Clock3 size={14} className="text-yellow-500" />
-									Collaborative sessions every week
-								</div>
+								<div className="flex items-center gap-2 text-[11px] text-white/50">Study group</div>
+								<div className="mt-2 flex items-center gap-2 text-sm text-white/80">Collaborative sessions every week</div>
 							</div>
 						</div>
 

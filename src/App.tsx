@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import HomePage from './pages/home/HomePage';
+import StudentSignIn from './pages/student/StudentSignIn';
 import StudentSignUp from './pages/student/StudentSignUp';
 
 export default function App() {
@@ -21,7 +22,9 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white">
       {path === '/student-signup' ? (
-        <StudentSignUp onBackHome={() => navigate('/')} />
+        <StudentSignUp onBackHome={() => navigate('/')} onSignInClick={() => navigate('/student-signin')} />
+      ) : path === '/student-signin' ? (
+        <StudentSignIn onBackHome={() => navigate('/')} onSignUpClick={() => navigate('/student-signup')} />
       ) : (
         <HomePage onEnrollClick={() => navigate('/student-signup')} />
       )}
