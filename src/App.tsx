@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import HomePage from './pages/home/HomePage';
 import StudentSignIn from './pages/student/StudentSignIn';
 import StudentSignUp from './pages/student/StudentSignUp';
+import StudentDashboard from './pages/student/StudentDashboard';
 
 export default function App() {
-  const [path, setPath] = useState(window.location.pathname);
+  const [path, setPath] = useState(window.location.pathname === '/' ? '/student-dashboard' : window.location.pathname);
 
   useEffect(() => {
     const onPopState = () => setPath(window.location.pathname);
@@ -21,7 +22,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white">
-      {path === '/student-signup' ? (
+        {path === '/student-dashboard' ? (
+          <StudentDashboard onNavigateHome={() => navigate('/')} />
+        ) : path === '/student-signup' ? (
         <StudentSignUp onBackHome={() => navigate('/')} onSignInClick={() => navigate('/student-signin')} />
       ) : path === '/student-signin' ? (
         <StudentSignIn onBackHome={() => navigate('/')} onSignUpClick={() => navigate('/student-signup')} />
