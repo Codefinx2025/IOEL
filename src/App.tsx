@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import LectureDashboard from './pages/lecturer/LectureDashboard';
 import HomePage from './pages/home/HomePage';
 import StudentSignIn from './pages/student/StudentSignIn';
 import StudentSignUp from './pages/student/StudentSignUp';
@@ -21,17 +22,19 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-white">
-        {path === '/' || path === '/student-all-courses' || path === '/student-dashboard' ? (
-          <StudentAllCourses />
-        ) : path === '/home' ? (
-          <HomePage onEnrollClick={() => navigate('/student-signup')} />
-        ) : path === '/student-signup' ? (
-      <StudentSignUp onBackHome={() => navigate('/home')} onSignInClick={() => navigate('/student-signin')} />
+    <div className="min-h-screen bg-[#f5f4f1] text-[#111111]">
+      {path === '/' || path === '/lecturer-dashboard' || path === '' ? (
+        <LectureDashboard />
+      ) : path === '/home' ? (
+        <HomePage onEnrollClick={() => navigate('/student-signup')} />
+      ) : path === '/student-all-courses' || path === '/student-dashboard' ? (
+        <StudentAllCourses />
+      ) : path === '/student-signup' ? (
+        <StudentSignUp onBackHome={() => navigate('/home')} onSignInClick={() => navigate('/student-signin')} />
       ) : path === '/student-signin' ? (
-      <StudentSignIn onBackHome={() => navigate('/home')} onSignUpClick={() => navigate('/student-signup')} />
+        <StudentSignIn onBackHome={() => navigate('/home')} onSignUpClick={() => navigate('/student-signup')} />
       ) : (
-      <HomePage onEnrollClick={() => navigate('/student-signup')} />
+        <LectureDashboard />
       )}
     </div>
   );
