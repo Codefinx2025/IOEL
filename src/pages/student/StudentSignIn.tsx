@@ -4,9 +4,10 @@ import { Apple, Chrome, Eye, EyeOff, Lock, Mail, X } from 'lucide-react';
 interface StudentSignInProps {
 	onBackHome: () => void;
 	onSignUpClick: () => void;
+	onForgotPasswordClick: () => void;
 }
 
-export default function StudentSignIn({ onBackHome, onSignUpClick }: StudentSignInProps) {
+export default function StudentSignIn({ onBackHome, onSignUpClick, onForgotPasswordClick }: StudentSignInProps) {
 	const [showPassword, setShowPassword] = useState(false);
 	const [rememberMe, setRememberMe] = useState(true);
 
@@ -85,7 +86,7 @@ export default function StudentSignIn({ onBackHome, onSignUpClick }: StudentSign
 									/>
 									Remember me
 								</label>
-								<button type="button" className="text-xs font-medium text-yellow-500 transition hover:text-yellow-400 sm:text-sm">
+								<button type="button" onClick={onForgotPasswordClick} className="text-xs font-medium text-yellow-500 transition hover:text-yellow-400 sm:text-sm">
 									Forgot password?
 								</button>
 							</div>

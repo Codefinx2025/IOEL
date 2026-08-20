@@ -4,6 +4,7 @@ import HomePage from './pages/home/HomePage';
 import StudentSignIn from './pages/student/StudentSignIn';
 import StudentSignUp from './pages/student/StudentSignUp';
 import StudentAllCourses from './pages/student/StudentAllCourses';
+import StudentFogotPassword from './pages/student/StudentFogotPassword';
 
 export default function App() {
   const [path, setPath] = useState(window.location.pathname);
@@ -23,16 +24,22 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#f5f4f1] text-[#111111]">
-      {path === '/' || path === '/lecturer-dashboard' || path === '' ? (
-        <LectureDashboard />
-      ) : path === '/home' ? (
+      {path === '/' || path === '/home' || path === '' ? (
         <HomePage onEnrollClick={() => navigate('/student-signup')} />
+      ) : path === '/lecturer-dashboard' ? (
+        <LectureDashboard />
       ) : path === '/student-all-courses' || path === '/student-dashboard' ? (
         <StudentAllCourses />
       ) : path === '/student-signup' ? (
         <StudentSignUp onBackHome={() => navigate('/home')} onSignInClick={() => navigate('/student-signin')} />
       ) : path === '/student-signin' ? (
-        <StudentSignIn onBackHome={() => navigate('/home')} onSignUpClick={() => navigate('/student-signup')} />
+        <StudentSignIn
+          onBackHome={() => navigate('/home')}
+          onSignUpClick={() => navigate('/student-signup')}
+          onForgotPasswordClick={() => navigate('/student-forgot-password')}
+        />
+      ) : path === '/student-forgot-password' ? (
+        <StudentFogotPassword onBackToSignIn={() => navigate('/student-signin')} onClose={() => navigate('/home')} />
       ) : (
         <LectureDashboard />
       )}
