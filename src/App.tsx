@@ -7,6 +7,7 @@ import StudentAllCourses from './pages/student/StudentAllCourses';
 import StudentFogotPassword from './pages/student/StudentFogotPassword';
 import StudentChangePassword from './pages/student/StudentChangePassword';
 import StudentCourseDetails from './pages/student/StudentCourseDetails';
+import StudentSavedCourses from './pages/student/StudentSavedCourses';
 
 export default function App() {
   const [path, setPath] = useState(window.location.pathname);
@@ -26,7 +27,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#f5f4f1] text-[#111111]">
-      {path === '/' || path === '' || path === '/student-course-details' ? (
+			{path === '/' || path === '' || path === '/student-saved-courses' ? (
+				<StudentSavedCourses />
+			) : path === '/student-course-details' ? (
 			<StudentCourseDetails />
       ) : path === '/home' ? (
         <HomePage onEnrollClick={() => navigate('/student-signup')} />
