@@ -9,6 +9,7 @@ import StudentChangePassword from './pages/student/StudentChangePassword';
 import StudentCourseDetails from './pages/student/StudentCourseDetails';
 import StudentSavedCourses from './pages/student/StudentSavedCourses';
 import StudentCourseLearning from './pages/student/StudentCourseLearning';
+import StudentProfile from './pages/student/StudentProfile';
 
 export default function App() {
   const [path, setPath] = useState(window.location.pathname);
@@ -30,12 +31,14 @@ export default function App() {
     <div className="min-h-screen bg-[#f5f4f1] text-[#111111]">
       {path === '/' || path === '' || path === '/student-course-learning' ? (
         <StudentCourseLearning />
+      ) : path === '/home' ? (
+        <HomePage onEnrollClick={() => navigate('/student-signup')} />
       ) : path === '/student-saved-courses' ? (
         <StudentSavedCourses />
 			) : path === '/student-course-details' ? (
 			<StudentCourseDetails />
-      ) : path === '/home' ? (
-        <HomePage onEnrollClick={() => navigate('/student-signup')} />
+      ) : path === '/student-profile' ? (
+      <StudentProfile />
       ) : path === '/lecturer-dashboard' ? (
         <LectureDashboard />
       ) : path === '/student-all-courses' || path === '/student-dashboard' ? (

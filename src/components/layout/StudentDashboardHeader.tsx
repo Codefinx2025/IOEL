@@ -4,7 +4,12 @@ interface StudentDashboardHeaderProps {
 	onOpenMenu?: () => void;
 }
 
-export default function StudentDashboardHeader({ onOpenMenu }: StudentDashboardHeaderProps) {
+export default function StudentDashboardHeader({ onOpenMenu: _onOpenMenu }: StudentDashboardHeaderProps) {
+	const openProfile = () => {
+		window.history.pushState({}, '', '/student-profile');
+		window.dispatchEvent(new PopStateEvent('popstate'));
+	};
+
 	return (
 		<header className="sticky top-0 z-40 border-b border-black/5 bg-white/90 backdrop-blur-xl">
 			<div className="mx-auto flex max-w-[1400px] items-center gap-4 px-4 py-3 sm:px-6 lg:px-8">
@@ -40,7 +45,7 @@ export default function StudentDashboardHeader({ onOpenMenu }: StudentDashboardH
 					</button>
 					<button
 						type="button"
-						onClick={onOpenMenu}
+						onClick={openProfile}
 						className="flex items-center gap-2 rounded-full border border-black/10 bg-white px-2 py-1.5 pr-3 text-left shadow-[0_6px_20px_rgba(0,0,0,0.05)] transition hover:border-[#F5A800]/40"
 					>
 						<div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#111111] text-sm font-bold text-[#F5A800]">EO</div>
