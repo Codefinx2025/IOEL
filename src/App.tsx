@@ -10,6 +10,7 @@ import StudentCourseDetails from './pages/student/StudentCourseDetails';
 import StudentSavedCourses from './pages/student/StudentSavedCourses';
 import StudentCourseLearning from './pages/student/StudentCourseLearning';
 import StudentProfile from './pages/student/StudentProfile';
+import StudentShoppingCart from './pages/student/StudentShoppingCart';
 
 export default function App() {
   const [path, setPath] = useState(window.location.pathname);
@@ -39,6 +40,8 @@ export default function App() {
 			<StudentCourseDetails />
       ) : path === '/student-profile' ? (
       <StudentProfile />
+      ) : path === '/student-shopping-cart' ? (
+        <StudentShoppingCart />
       ) : path === '/lecturer-dashboard' ? (
         <LectureDashboard />
       ) : path === '/student-all-courses' || path === '/student-dashboard' ? (

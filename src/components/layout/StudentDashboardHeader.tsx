@@ -5,6 +5,11 @@ interface StudentDashboardHeaderProps {
 }
 
 export default function StudentDashboardHeader({ onOpenMenu: _onOpenMenu }: StudentDashboardHeaderProps) {
+	const openCart = () => {
+		window.history.pushState({}, '', '/student-shopping-cart');
+		window.dispatchEvent(new PopStateEvent('popstate'));
+	};
+
 	const openProfile = () => {
 		window.history.pushState({}, '', '/student-profile');
 		window.dispatchEvent(new PopStateEvent('popstate'));
@@ -36,7 +41,7 @@ export default function StudentDashboardHeader({ onOpenMenu: _onOpenMenu }: Stud
 					<button type="button" className="flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white text-black/70 shadow-[0_6px_20px_rgba(0,0,0,0.05)] transition hover:border-[#F5A800]/40 hover:text-[#F5A800] lg:hidden">
 						<Search size={18} />
 					</button>
-					<button type="button" className="flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white text-black/70 shadow-[0_6px_20px_rgba(0,0,0,0.05)] transition hover:border-[#F5A800]/40 hover:text-[#F5A800]">
+					<button type="button" onClick={openCart} aria-label="Open shopping cart" className="flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white text-black/70 shadow-[0_6px_20px_rgba(0,0,0,0.05)] transition hover:border-[#F5A800]/40 hover:text-[#F5A800]">
 						<ShoppingCart size={18} />
 					</button>
 					<button type="button" className="relative flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white text-black/70 shadow-[0_6px_20px_rgba(0,0,0,0.05)] transition hover:border-[#F5A800]/40 hover:text-[#F5A800]">
