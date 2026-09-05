@@ -11,6 +11,7 @@ import StudentSavedCourses from './pages/student/StudentSavedCourses';
 import StudentCourseLearning from './pages/student/StudentCourseLearning';
 import StudentProfile from './pages/student/StudentProfile';
 import StudentShoppingCart from './pages/student/StudentShoppingCart';
+import StudentCheckout from './pages/student/StudentCheckout';
 
 export default function App() {
   const [path, setPath] = useState(window.location.pathname);
@@ -42,6 +43,8 @@ export default function App() {
       <StudentProfile />
       ) : path === '/student-shopping-cart' ? (
         <StudentShoppingCart />
+      ) : path === '/student-checkout' ? (
+        <StudentCheckout />
       ) : path === '/lecturer-dashboard' ? (
         <LectureDashboard />
       ) : path === '/student-all-courses' || path === '/student-dashboard' ? (
