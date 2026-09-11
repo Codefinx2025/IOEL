@@ -16,6 +16,7 @@ import StudentAccountSettings from './pages/student/StudentAccountSettings';
 import StudentMyProgress from './pages/student/StudentMyProgress';
 import StudentCompleteCourse from './pages/student/StudentCompleteCourse';
 import StudentReviews from './pages/student/StudentReviews';
+import StudentMyCertificates from './pages/student/StudentMyCertificates';
 
 export default function App() {
   const [path, setPath] = useState(window.location.pathname);
@@ -35,7 +36,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#f5f4f1] text-[#111111]">
-      {path === '/' || path === '' || path === '/student-reviews' ? (
+      {path === '/' || path === '' || path === '/student-certificates' ? (
+        <StudentMyCertificates />
+      ) : path === '/student-reviews' ? (
         <StudentReviews />
       ) : path === '/student-complete-course' ? (
         <StudentCompleteCourse />
