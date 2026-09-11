@@ -15,6 +15,7 @@ import StudentCheckout from './pages/student/StudentCheckout';
 import StudentAccountSettings from './pages/student/StudentAccountSettings';
 import StudentMyProgress from './pages/student/StudentMyProgress';
 import StudentCompleteCourse from './pages/student/StudentCompleteCourse';
+import StudentReviews from './pages/student/StudentReviews';
 
 export default function App() {
   const [path, setPath] = useState(window.location.pathname);
@@ -34,7 +35,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#f5f4f1] text-[#111111]">
-      {path === '/' || path === '' || path === '/student-complete-course' ? (
+      {path === '/' || path === '' || path === '/student-reviews' ? (
+        <StudentReviews />
+      ) : path === '/student-complete-course' ? (
         <StudentCompleteCourse />
       ) : path === '/student-my-progress' ? (
         <StudentMyProgress />
