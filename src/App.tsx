@@ -40,7 +40,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#f5f4f1] text-[#111111]">
       {path === '/' || path === '' ? (
-        <LectureFogotPassword onBackToSignIn={() => navigate('/lecture-signin')} onClose={() => navigate('/home')} onSendResetLink={() => navigate('/lecture-change-password')} />
+        <LectureDashboard />
       ) : path === '/student-certificates' ? (
         <StudentMyCertificates />
       ) : path === '/student-reviews' ? (

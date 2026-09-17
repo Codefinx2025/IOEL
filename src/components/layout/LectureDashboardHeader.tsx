@@ -1,6 +1,10 @@
+import { useState } from 'react';
 import { Bell, ChevronDown, Menu, Search, SlidersHorizontal } from 'lucide-react';
+import LectureSideBar from './LectureSideBar';
 
 export default function LectureDashboardHeader() {
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+
   return (
     <header className="sticky top-0 z-40 border-b border-[#1d1b17]/5 bg-[#f9f8f5]/95 backdrop-blur-xl">
       <div className="mx-auto flex max-w-[1280px] items-center gap-4 px-4 py-3 sm:px-6 lg:px-8">
@@ -54,6 +58,9 @@ export default function LectureDashboardHeader() {
 
           <button
             type="button"
+            onClick={() => setIsProfileMenuOpen((open) => !open)}
+            aria-expanded={isProfileMenuOpen}
+            aria-label="Open profile menu"
             className="flex items-center gap-3 rounded-full border border-[#111111]/10 bg-white px-2 py-1.5 pr-3 shadow-[0_8px_20px_rgba(0,0,0,0.04)] transition hover:border-[#f5a800]/35"
           >
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#111111] text-xs font-bold text-[#f5a800]">
@@ -66,6 +73,7 @@ export default function LectureDashboardHeader() {
           </button>
         </div>
       </div>
+      {isProfileMenuOpen && <LectureSideBar onClose={() => setIsProfileMenuOpen(false)} />}
     </header>
   );
 }
