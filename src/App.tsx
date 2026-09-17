@@ -18,6 +18,7 @@ import StudentCompleteCourse from './pages/student/StudentCompleteCourse';
 import StudentReviews from './pages/student/StudentReviews';
 import StudentMyCertificates from './pages/student/StudentMyCertificates';
 import LectureSignIn from './pages/lecturer/LectureSignIn';
+import LectureChangePassword from './pages/lecturer/LectureChangePassword';
 
 export default function App() {
   const [path, setPath] = useState(window.location.pathname);
@@ -38,11 +39,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#f5f4f1] text-[#111111]">
       {path === '/' || path === '' ? (
-        <LectureSignIn
-          onBackHome={() => navigate('/home')}
-          onSignUpClick={() => navigate('/student-signup')}
-          onForgotPasswordClick={() => navigate('/student-forgot-password')}
-        />
+        <LectureChangePassword onBackToSignIn={() => navigate('/lecture-signin')} onClose={() => navigate('/home')} />
       ) : path === '/student-certificates' ? (
         <StudentMyCertificates />
       ) : path === '/student-reviews' ? (
@@ -89,6 +86,8 @@ export default function App() {
           onSignUpClick={() => navigate('/student-signup')}
           onForgotPasswordClick={() => navigate('/student-forgot-password')}
         />
+      ) : path === '/lecture-change-password' ? (
+        <LectureChangePassword onBackToSignIn={() => navigate('/lecture-signin')} onClose={() => navigate('/home')} />
       ) : (
         <LectureDashboard />
       )}
