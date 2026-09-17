@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import { Apple, Chrome, Eye, EyeOff, Lock, Mail, X } from 'lucide-react';
+import { Eye, EyeOff, Lock, Mail, X } from 'lucide-react';
 
 interface StudentSignInProps {
 	onBackHome: () => void;
 	onSignUpClick: () => void;
 	onForgotPasswordClick: () => void;
+	heroImage?: string;
 }
 
-export default function StudentSignIn({ onBackHome, onSignUpClick, onForgotPasswordClick }: StudentSignInProps) {
+export default function StudentSignIn({ onBackHome, onSignUpClick, onForgotPasswordClick, heroImage = '/images/students.png' }: StudentSignInProps) {
 	const [showPassword, setShowPassword] = useState(false);
 	const [rememberMe, setRememberMe] = useState(true);
 
@@ -98,28 +99,6 @@ export default function StudentSignIn({ onBackHome, onSignUpClick, onForgotPassw
 								Sign in
 							</button>
 
-							<div className="flex items-center gap-4 py-1">
-								<div className="h-px flex-1 bg-white/10" />
-								<span className="text-xs text-white/35">or continue with</span>
-								<div className="h-px flex-1 bg-white/10" />
-							</div>
-
-							<div className="grid grid-cols-2 gap-3">
-								<button
-									type="button"
-									className="flex h-14 items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/[0.03] text-sm font-medium text-white/80 transition hover:border-white/20 hover:bg-white/[0.06]"
-								>
-									<Apple size={18} />
-									Apple
-								</button>
-								<button
-									type="button"
-									className="flex h-14 items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/[0.03] text-sm font-medium text-white/80 transition hover:border-white/20 hover:bg-white/[0.06]"
-								>
-									<Chrome size={18} className="text-[#fbbc05]" />
-									Google
-								</button>
-							</div>
 						</form>
 
 						<div className="mt-10 flex flex-col gap-3 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between sm:text-sm">
@@ -137,7 +116,7 @@ export default function StudentSignIn({ onBackHome, onSignUpClick, onForgotPassw
 
 					<section className="relative min-h-[520px] overflow-hidden bg-[#0a0a0a] lg:min-h-0">
 						<img
-							src="/images/students.png"
+							src={heroImage}
 							alt="Students collaborating"
 							className="absolute inset-0 h-full w-full object-cover object-center"
 						/>
