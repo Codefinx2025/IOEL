@@ -21,6 +21,7 @@ import LectureSignIn from './pages/lecturer/LectureSignIn';
 import LectureChangePassword from './pages/lecturer/LectureChangePassword';
 import LectureFogotPassword from './pages/lecturer/LectureFogotPassword';
 import LectureCreateCourse from './pages/lecturer/LectureCreateCourse';
+import LectureCourseCurriculum from './pages/lecturer/LectureCourseCurriculum';
 
 export default function App() {
   const [path, setPath] = useState(window.location.pathname);
@@ -40,8 +41,8 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#f5f4f1] text-[#111111]">
-      {path === '/' || path === '' ? (
-        <LectureCreateCourse />
+      {path === '/' || path === '' || path === '/lecture-course-curriculum' ? (
+        <LectureCourseCurriculum />
       ) : path === '/student-certificates' ? (
         <StudentMyCertificates />
       ) : path === '/student-reviews' ? (
