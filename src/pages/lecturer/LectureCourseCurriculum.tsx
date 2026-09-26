@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import LectureDashboardFooter from '../../components/layout/LectureDashboardFooter';
 import LectureDashboardHeader from '../../components/layout/LectureDashboardHeader';
+import LectureAddLessons from './LectureAddLessons';
 
 type Lesson = { title: string; type: string; icon: 'video' | 'pdf' | 'quiz' | 'assignment' | 'article' | 'link'; duration: string };
 
@@ -41,9 +42,10 @@ export default function LectureCourseCurriculum() {
 	const [sections, setSections] = useState(initialSections);
 	const [openSections, setOpenSections] = useState([true, true, false]);
 	const [saved, setSaved] = useState(false);
+	const [showAddLesson, setShowAddLesson] = useState(false);
 
-	const addSection = () => {
-		setSections((current) => [...current, { title: `Section ${current.length + 1}: New Section`, lessons: [] }]);
+	const addLessonToNewSection = (lesson: { title: string; type: 'Video'; duration: string }) => {
+		setSections((current) => [...current, { title: `Section ${current.length + 1}: New Section`, lessons: [{ ...lesson, icon: 'video' }] }]);
 		setOpenSections((current) => [...current, true]);
 	};
 
@@ -67,14 +69,15 @@ export default function LectureCourseCurriculum() {
 			<div className="mt-4 grid gap-4 lg:grid-cols-[minmax(0,1fr)_300px]">
 				<section className="rounded-md border border-[#172033]/10 bg-white p-3 shadow-[0_5px_18px_rgba(23,32,51,0.03)] sm:p-4">
 					<div className="flex items-start justify-between border-b border-[#172033]/8 pb-3"><div><h2 className="flex items-center gap-2 text-xs font-bold"><span className="text-[#f5a800]"><BookOpen size={14} /></span>Curriculum</h2><p className="mt-1 text-[8px] text-[#172033]/45">Organize your course into sections and lessons. You can add videos, documents, quizzes, assignments and more.</p></div><button type="button" onClick={() => setOpenSections(sections.map(() => true))} className="hidden items-center gap-1 text-[8px] font-semibold text-[#172033]/60 sm:flex">Expand All <ChevronDown size={11} /></button></div>
-					<div className="mt-3 flex items-center justify-between"><span className="rounded bg-[#f5f6f8] px-2 py-1 text-[8px] font-bold">Course Curriculum <span className="ml-1 font-normal text-[#172033]/50">3 Sections · 11 Lessons</span></span><button type="button" onClick={addSection} className="inline-flex items-center gap-1 rounded bg-[#172033] px-2 py-1.5 text-[8px] font-bold text-white"><Plus size={10} /> Add Section</button></div>
+					<div className="mt-3 flex items-center justify-between"><span className="rounded bg-[#f5f6f8] px-2 py-1 text-[8px] font-bold">Course Curriculum <span className="ml-1 font-normal text-[#172033]/50">3 Sections · 11 Lessons</span></span><button type="button" onClick={() => setShowAddLesson(true)} className="inline-flex items-center gap-1 rounded bg-[#172033] px-2 py-1.5 text-[8px] font-bold text-white"><Plus size={10} /> Add Section</button></div>
 					<div className="mt-3 space-y-2">{sections.map((section, sectionIndex) => <div key={section.title} className="overflow-hidden rounded border border-[#172033]/10"><button type="button" onClick={() => setOpenSections((current) => current.map((open, index) => index === sectionIndex ? !open : open))} className="flex w-full items-center justify-between bg-[#fbfcfd] px-3 py-2 text-left"><span className="flex items-center gap-2 text-[9px] font-bold"><GripVertical size={11} className="text-[#172033]/45" />{section.title}</span><span className="flex items-center gap-2 text-[8px] text-[#172033]/55">{section.lessons.length} Lessons <ChevronDown size={12} className={`transition ${openSections[sectionIndex] ? 'rotate-180' : ''}`} /></span></button>{openSections[sectionIndex] && <div className="p-1.5">{section.lessons.map((lesson) => <LessonRow key={`${section.title}-${lesson.title}`} lesson={lesson} />)}<button type="button" onClick={() => addLesson(sectionIndex)} className="mt-1 inline-flex items-center gap-1 px-2 py-1 text-[8px] font-bold text-[#f5a800]"><Plus size={10} /> Add Lesson</button></div>}</div>)}</div>
-					<button type="button" onClick={addSection} className="mt-2 flex w-full items-center justify-center gap-1 rounded border border-dashed border-[#f5a800]/60 py-2 text-[8px] font-bold text-[#f5a800]"><Plus size={11} /> Add Section</button>
+					<button type="button" onClick={() => setShowAddLesson(true)} className="mt-2 flex w-full items-center justify-center gap-1 rounded border border-dashed border-[#f5a800]/60 py-2 text-[8px] font-bold text-[#f5a800]"><Plus size={11} /> Add Section</button>
 					<div className="mt-3 flex items-center justify-between border-t border-[#172033]/8 pt-3"><button type="button" className="rounded border border-[#172033]/10 px-3 py-1.5 text-[8px] font-bold">← Back: Basic Information</button><button type="button" className="inline-flex items-center gap-2 rounded bg-[#f5a800] px-3 py-1.5 text-[8px] font-bold">Next: Pricing <ArrowRight size={11} /></button></div>
 				</section>
 				<aside className="space-y-3"><AddLessonPanel /><StoragePanel /><TipsPanel /><SupportPanel /></aside>
 			</div>
 		</main>
+		{showAddLesson && <LectureAddLessons onClose={() => setShowAddLesson(false)} onAddLesson={addLessonToNewSection} />}
 		<LectureDashboardFooter />
 	</div>;
 }
