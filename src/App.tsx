@@ -22,6 +22,7 @@ import LectureChangePassword from './pages/lecturer/LectureChangePassword';
 import LectureFogotPassword from './pages/lecturer/LectureFogotPassword';
 import LectureCreateCourse from './pages/lecturer/LectureCreateCourse';
 import LectureCourseCurriculum from './pages/lecturer/LectureCourseCurriculum';
+import LectureAddPricing from './pages/lecturer/LectureAddPricing';
 
 export default function App() {
   const [path, setPath] = useState(window.location.pathname);
@@ -42,7 +43,9 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#f5f4f1] text-[#111111]">
       {path === '/' || path === '' || path === '/lecture-course-curriculum' ? (
-        <LectureCourseCurriculum />
+        <LectureCourseCurriculum onNextPricing={() => navigate('/lecture-add-pricing')} />
+      ) : path === '/lecture-add-pricing' ? (
+        <LectureAddPricing onBack={() => navigate('/lecture-course-curriculum')} />
       ) : path === '/student-certificates' ? (
         <StudentMyCertificates />
       ) : path === '/student-reviews' ? (
