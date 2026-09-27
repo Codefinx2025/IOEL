@@ -23,6 +23,7 @@ import LectureFogotPassword from './pages/lecturer/LectureFogotPassword';
 import LectureCreateCourse from './pages/lecturer/LectureCreateCourse';
 import LectureCourseCurriculum from './pages/lecturer/LectureCourseCurriculum';
 import LectureAddPricing from './pages/lecturer/LectureAddPricing';
+import LectureCoursePreview from './pages/lecturer/LectureCoursePreview';
 
 export default function App() {
   const [path, setPath] = useState(window.location.pathname);
@@ -45,7 +46,9 @@ export default function App() {
       {path === '/' || path === '' || path === '/lecture-course-curriculum' ? (
         <LectureCourseCurriculum onNextPricing={() => navigate('/lecture-add-pricing')} />
       ) : path === '/lecture-add-pricing' ? (
-        <LectureAddPricing onBack={() => navigate('/lecture-course-curriculum')} />
+        <LectureAddPricing onBack={() => navigate('/lecture-course-curriculum')} onNextPreview={() => navigate('/lecture-course-preview')} />
+      ) : path === '/lecture-course-preview' ? (
+        <LectureCoursePreview onBack={() => navigate('/lecture-add-pricing')} onPublish={() => navigate('/lecturer-dashboard')} />
       ) : path === '/student-certificates' ? (
         <StudentMyCertificates />
       ) : path === '/student-reviews' ? (
