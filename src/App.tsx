@@ -27,6 +27,7 @@ import LectureCoursePreview from './pages/lecturer/LectureCoursePreview';
 import LectureReviews from './pages/lecturer/LectureReviews';
 import LectureProfile from './pages/lecturer/LectureProfile';
 import LectureAccountSettings from './pages/lecturer/LectureAccountSettings';
+import LectureMyCourses from './pages/lecturer/LectureMyCourses';
 
 export default function App() {
   const [path, setPath] = useState(window.location.pathname);
@@ -78,6 +79,8 @@ export default function App() {
         <StudentCheckout />
       ) : path === '/lecturer-dashboard' ? (
         <LectureDashboard />
+      ) : path === '/lecture-my-courses' ? (
+        <LectureMyCourses />
       ) : path === '/lecture-reviews' ? (
         <LectureReviews />
       ) : path === '/lecture-profile' ? (
