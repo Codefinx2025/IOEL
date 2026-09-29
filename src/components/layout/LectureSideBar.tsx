@@ -89,7 +89,7 @@ function SidebarGroup({ items, onSelect, divided = false }: { items: SidebarItem
 	return (
 		<div className={`${divided ? 'border-t border-[#111111]/8 pt-2' : ''} mt-2`}>
 			{items.map(({ label, icon: Icon }) => (
-				<button key={label} type="button" onClick={() => { onSelect(); const routes: Record<string, string> = { Reviews: '/lecture-reviews', Profile: '/lecture-profile' }; const route = routes[label]; if (route) { window.history.pushState({}, '', route); window.dispatchEvent(new PopStateEvent('popstate')); } }} className="flex w-full items-center gap-3 rounded-lg px-1 py-2 text-[12px] text-[#111111]/85 transition hover:bg-[#f5a800]/10 hover:text-[#111111]">
+				<button key={label} type="button" onClick={() => { onSelect(); const routes: Record<string, string> = { Reviews: '/lecture-reviews', Profile: '/lecture-profile', 'Account Settings': '/lecture-account-settings' }; const route = routes[label]; if (route) { window.history.pushState({}, '', route); window.dispatchEvent(new PopStateEvent('popstate')); } }} className="flex w-full items-center gap-3 rounded-lg px-1 py-2 text-[12px] text-[#111111]/85 transition hover:bg-[#f5a800]/10 hover:text-[#111111]">
 					<Icon size={15} strokeWidth={1.7} />
 					<span>{label}</span>
 				</button>
